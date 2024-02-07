@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://chws0c0vudcdh"]
+
+[ext_resource type="PackedScene" uid="uid://crc6ou2ny0ck3" path="res://Scenes/player_1.tscn" id="1_kfjmi"]
+[ext_resource type="Script" path="res://Scripts/rope.gd" id="1_qylc6"]
+[ext_resource type="Script" path="res://Scripts/player2.gd" id="2_p0km1"]
+
+[node name="Main" type="Node"]
+
+[node name="Controller" type="Node2D" parent="."]
+position = Vector2(614, 322)
+
+[node name="Rope" type="Line2D" parent="Controller"]
+script = ExtResource("1_qylc6")
+
+[node name="Player2" parent="Controller/Rope" instance=ExtResource("1_kfjmi")]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(150, 0)
+script = ExtResource("2_p0km1")
+
+[node name="Player1" parent="Controller/Rope" instance=ExtResource("1_kfjmi")]
+position = Vector2(-150, 0)

@@ -1,0 +1,72 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Band of Fools"
+config/features=PackedStringArray("4.2", "Forward Plus")
+config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="Band of Fools"
+
+[input]
+
+left1={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
+]
+}
+right1={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
+]
+}
+up1={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
+]
+}
+down1={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
+]
+}
+left2={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":-1.0,"script":null)
+]
+}
+right2={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":2,"axis_value":1.0,"script":null)
+]
+}
+up2={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":-1.0,"script":null)
+]
+}
+down2={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":1.0,"script":null)
+]
+}
+stop1={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":4,"axis_value":1.0,"script":null)
+]
+}
+stop2={
+"deadzone": 0.5,
+"events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
+]
+}
