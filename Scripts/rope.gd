@@ -6,6 +6,7 @@ extends Line2D
 var attackState1 = false
 var attackState2 = false
 @export var drawbackLength: float = 300.0
+@export var maxLength = 400.0
 
 var player1
 var player2
@@ -15,8 +16,16 @@ func _ready():
 	player2 = $Player2
 
 func _physics_process(delta):
-	print("attack1: %s" % attackState1)
-	print("attack2: %s" % attackState2)
+	
+	if attackState1:
+		player1.modulate = Color.RED
+	else:
+		player1.modulate = Color.WHITE
+	
+	if attackState2:
+		player2.modulate = Color.RED
+	else:
+		player2.modulate = Color("ff00ff")
 	
 	var input1 = player1.velocity
 	var input2 = player2.velocity
@@ -45,16 +54,18 @@ func _physics_process(delta):
 		player1.apply_force(snapback1 * stretch * defaultForceScale)
 	if player2.freeze == false:
 		player2.apply_force(snapback2 * stretch * defaultForceScale)
-		
+	
+	#Calculates the magnitude of the drawback 
+	var drawbackScale = (ropeLength.length() - drawbackLength) / (maxLength - drawbackLength)
 	
 	#WIP: Crappy way of implementing attack, need to change
 	if player1.freeze == true and ropeLength.length() > drawbackLength and input2 == Vector2.ZERO and not attackState2:
 		#NEED TO FIX
-		player2.apply_central_impulse(attackForceScale * snapback2.normalized())
+		player2.apply_central_impulse(attackForceScale * snapback2.normalized() * clamp(drawbackScale, 0.6, 1))
 		attackState2 = true
 	if player2.freeze == true and ropeLength.length() > drawbackLength and input1 == Vector2.ZERO and not attackState1:
 		#NEED TO FIX
-		player1.apply_central_impulse(attackForceScale * snapback1.normalized())
+		player1.apply_central_impulse(attackForceScale * snapback1.normalized() *  clamp(drawbackScale, 0.6, 1))
 		attackState1 = true
 
 	#Resets attack states
