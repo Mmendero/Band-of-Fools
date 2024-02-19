@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://dipapxb10nfgo"]
+
+[ext_resource type="Script" path="res://Characters/Gumm/gumm.gd" id="1_6dhan"]
+[ext_resource type="Texture2D" uid="uid://cfbg0jxa0ca20" path="res://Assets/player_sprites.png" id="2_85jfn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as5dj"]
+atlas = ExtResource("2_85jfn")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xki5j"]
+atlas = ExtResource("2_85jfn")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctl2u"]
+atlas = ExtResource("2_85jfn")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48yxi"]
+atlas = ExtResource("2_85jfn")
+region = Rect2(96, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yauf4"]
+atlas = ExtResource("2_85jfn")
+region = Rect2(144, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdieq"]
+atlas = ExtResource("2_85jfn")
+region = Rect2(192, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_veqr2"]
+atlas = ExtResource("2_85jfn")
+region = Rect2(240, 192, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_76j2n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_as5dj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xki5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctl2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48yxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yauf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdieq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_veqr2")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rlrqm"]
+radius = 6.0
+height = 20.0
+
+[node name="Gumm" type="CharacterBody2D"]
+script = ExtResource("1_6dhan")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.945098, 0.0313726, 0.870588, 1)
+sprite_frames = SubResource("SpriteFrames_76j2n")
+animation = &"idle"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_rlrqm")

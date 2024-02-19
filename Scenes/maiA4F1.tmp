@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://chws0c0vudcdh"]
+
+[ext_resource type="Script" path="res://Scripts/rope.gd" id="1_qylc6"]
+[ext_resource type="PackedScene" uid="uid://cuv3e4k6bcg47" path="res://Characters/Cleo/cleo.tscn" id="2_tg0w8"]
+[ext_resource type="PackedScene" uid="uid://dipapxb10nfgo" path="res://Characters/Gumm/gumm.tscn" id="3_m3ok1"]
+
+[node name="Main" type="Node"]
+
+[node name="Controller" type="Node2D" parent="."]
+position = Vector2(614, 320)
+scale = Vector2(2, 2)
+
+[node name="Rope" type="Line2D" parent="Controller"]
+script = ExtResource("1_qylc6")
+
+[node name="Cleo" parent="Controller/Rope" instance=ExtResource("2_tg0w8")]
+position = Vector2(-83, 0)
+script = null
+
+[node name="Gumm" parent="Controller/Rope" instance=ExtResource("3_m3ok1")]
+position = Vector2(77, 0)
+script = null
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
