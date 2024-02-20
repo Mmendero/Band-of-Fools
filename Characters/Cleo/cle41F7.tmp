@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://cuv3e4k6bcg47"]
+
+[ext_resource type="Script" path="res://Characters/Cleo/cleo.gd" id="1_kdqks"]
+[ext_resource type="Texture2D" uid="uid://bjph5dum3fj55" path="res://Assets/cleo_spritemap.png" id="2_mabr6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwkpq"]
+atlas = ExtResource("2_mabr6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44ttq"]
+atlas = ExtResource("2_mabr6")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rtkn"]
+atlas = ExtResource("2_mabr6")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bok5a"]
+atlas = ExtResource("2_mabr6")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_76j2n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwkpq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44ttq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rtkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bok5a")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rlrqm"]
+radius = 6.0
+height = 20.0
+
+[node name="Cleo" type="CharacterBody2D"]
+script = ExtResource("1_kdqks")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_76j2n")
+animation = &"idle"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_rlrqm")
