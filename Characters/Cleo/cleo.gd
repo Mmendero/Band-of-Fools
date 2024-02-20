@@ -1,8 +1,8 @@
 extends RigidBody2D
 
 var velocity = Vector2()
-var MAX_SPEED = 350
-var ATTACK_SPEED = 2000
+var MAX_SPEED = 200
+var ATTACK_SPEED = 20000
 var INITAL_SPEED = 10000
 var attackState = false
 
@@ -12,11 +12,11 @@ signal slinging
 func _integrate_forces(state):
 	if state.linear_velocity.length() > MAX_SPEED:
 		if attackState:
-			state.linear_velocity = state.linear_velocity.normalized() * ATTACK_SPEED
+			state.linear_velocity = state.linear_velocity.normalized() * min(ATTACK_SPEED, state.linear_velocity.length())
 		else:
-			state.linear_velocity = state.linear_velocity.normalized() * MAX_SPEED
+			state.linear_velocity = state.linear_velocity.normalized() * min(MAX_SPEED, state.linear_velocity.length())
 	
-	# Halt movement when nothing is pressed. Remove for slippery characters	
+	# Halt movement when nothing is pressed. Remove for slippery characters
 	if Input.is_anything_pressed() == false:
 		state.linear_velocity.x = 0
 		state.linear_velocity.y = 0

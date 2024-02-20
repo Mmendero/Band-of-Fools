@@ -290,9 +290,13 @@ script = ExtResource("1_putd1")
 
 [node name="Cleo" parent="Band" instance=ExtResource("2_tg0w8")]
 position = Vector2(432, 296)
+gravity_scale = 0.0
+linear_damp = 8.0
 
 [node name="Gumm" parent="Band" instance=ExtResource("3_m3ok1")]
 position = Vector2(568, 296)
+gravity_scale = 0.0
+linear_damp = 8.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 328)

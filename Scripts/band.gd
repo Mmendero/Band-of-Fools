@@ -3,7 +3,7 @@ extends Line2D
 @export var defaultForceScale : float = 50.0
 @export var attackForceScale : float = 15000.0
 @export var BASE_LENGTH: float = 120.0
-@export var drawbackLength: float = 300.0
+@export var drawbackLength: float = 200.0
 @export var maxLength = 400.0
 var attackStateCleo = false
 var attackStateGumm = false
@@ -36,8 +36,8 @@ func _physics_process(delta):
 	var ropeLength: Vector2 = abs(Cleo.global_position - Gumm.global_position)
 	var stretch: float = ropeLength.length() - BASE_LENGTH
 	
-	# Prevents rope width from exceding a maximum size
-	width = min(1000 / ropeLength.length(), 100)
+	# Prevents band width from exceeding a maximum size
+	width = min(250 / ropeLength.length(), 50)
 
 	# Prevents an opposing force if stretch is less than 0
 	stretch = max(stretch, 0)
@@ -72,6 +72,7 @@ func _on_cleo_slinging():
 	var ropeLength: Vector2 = abs(Cleo.global_position - Gumm.global_position)
 	
 	# Calculates the magnitude of the drawback 
+	# TODO: Add clamp
 	var drawbackScale = (ropeLength.length() - drawbackLength) / (maxLength - drawbackLength)
 	
 	# Calculates how much to snap back based on character's distance from each other
