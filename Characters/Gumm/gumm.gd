@@ -1,25 +1,31 @@
 extends RigidBody2D
 
 var velocity = Vector2()
-var MAX_SPEED = 200
-var ATTACK_SPEED = 15000
-var INITAL_SPEED = 10000
+# RENAMED 
+@export var MAX_SPEED = 700
+var CONTROL_FORCE
 var attackState = false
+
+func _ready():
+	# TODO: Need to consider delta time when we apply it
+	#MAX_SPEED = CONTROL_FORCE / (mass*linear_damp)
+	CONTROL_FORCE = MAX_SPEED * (mass * linear_damp)
+	print("cleo control force: ", CONTROL_FORCE)
 
 signal slinging
 
 # Function to ignore physics engine for RigidBody2D
-func _integrate_forces(state):
-	if state.linear_velocity.length() > MAX_SPEED:
-		if attackState:
-			state.linear_velocity = state.linear_velocity.normalized() * min(ATTACK_SPEED, state.linear_velocity.length())
-		else:
-			state.linear_velocity = state.linear_velocity.normalized() * min(MAX_SPEED, state.linear_velocity.length())
-	
-	# Halt movement when nothing is pressed. Remove for slippery characters
-	if Input.is_anything_pressed() == false:
-		state.linear_velocity.x = 0
-		state.linear_velocity.y = 0
+#func _integrate_forces(state):
+	#if state.linear_velocity.length() > MAX_SPEED:
+		#if attackState:
+			#state.linear_velocity = state.linear_velocity.normalized() * min(ATTACK_SPEED, state.linear_velocity.length())
+		#else:
+			#state.linear_velocity = state.linear_velocity.normalized() * min(MAX_SPEED, state.linear_velocity.length())
+	#
+	## Halt movement when nothing is pressed. Remove for slippery characters
+	#if Input.is_anything_pressed() == false:
+		#state.linear_velocity.x = 0
+		#state.linear_velocity.y = 0
 
 func _physics_process(delta):
 	velocity = Input.get_vector("left2", "right2", "up2", "down2")
@@ -28,7 +34,7 @@ func _physics_process(delta):
 		# TODO: Fix this check. The idea is to not increase vector for each frome while player
 		# is holding down "stop2" to prevent teleporting after stop1 is released
 		if not Input.is_action_pressed("stop2"):
-			apply_central_force(velocity * INITAL_SPEED)
+			apply_central_force(velocity * CONTROL_FORCE)
 		
 		# Play Animations
 		$CollisionShape2D.disabled = false

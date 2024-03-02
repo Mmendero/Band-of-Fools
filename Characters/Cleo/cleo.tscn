@@ -45,10 +45,10 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rlrqm"]
-radius = 6.0
-height = 20.0
 
 [node name="Cleo" type="RigidBody2D"]
+gravity_scale = 0.0
+linear_damp = 10.0
 script = ExtResource("1_kdqks")
 metadata/_edit_group_ = true
 
@@ -58,6 +58,4 @@ animation = &"idle"
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_rlrqm")
