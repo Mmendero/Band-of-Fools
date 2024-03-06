@@ -146,3 +146,11 @@ offset_top = 68.0
 offset_right = 81.0
 offset_bottom = 91.0
 text = "[Values]"
+
+[connection signal="cleoSlingFinished" from="Band" to="Band/Cleo" method="_on_band_cleo_sling_finished"]
+[connection signal="cleoSlung" from="Band" to="Band/Cleo" method="_on_band_cleo_slung"]
+[connection signal="gummSlingFinished" from="Band" to="Band/Gumm" method="_on_band_gumm_sling_finished"]
+[connection signal="gummSlung" from="Band" to="Band/Gumm" method="_on_band_gumm_slung"]
+[connection signal="slinging" from="Band/Cleo" to="." method="_on_cleo_slinging"]
+[connection signal="slinging" from="Band/Cleo" to="Band" method="_on_cleo_slinging"]
+[connection signal="slinging" from="Band/Gumm" to="Band" method="_on_gumm_slinging"]
