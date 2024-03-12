@@ -9,10 +9,13 @@ var ropeLength: Vector2
 # Hypothetically, if Cleo and Gumm had different speeds, then both players would need different
 # min and max charge lengths, since the player with less speed will have a different, smaller range
 # in which they need to attack
-@export var MAX_STRETCH_LENGTH = 250
+@export var MAX_STRETCH_LENGTH = 240
 @export var MIN_CHARGE_LENGTH: float = (UNSTRETCHED_LENGTH + MAX_STRETCH_LENGTH) / 2
 
-
+var firstFrameSkip = true
+var prevLength = 0
+var pastBandLength = false
+var maxForce = 0
 var maxLength = 0 
 var Cleo
 var Gumm
@@ -34,6 +37,7 @@ func _process(delta):
 		add_point(child.position)
 
 func _physics_process(delta):
+	prevLength = ropeLength.length()
 	# Gets the vectorized rope length and calculates the magnitude of the stretch past the rope's base length
 	ropeLength = abs(Cleo.global_position - Gumm.global_position)
 	
@@ -55,6 +59,8 @@ func _physics_process(delta):
 		Gumm.apply_central_force(gummTether * stretchLength * DEFAULT_BAND_FORCE)
 	
 	maxLength = max(maxLength, ropeLength.length())
+	maxForce = max(maxForce, currBandForce)
+	
 	## Finish Attack and Reset Attack States
 	#if attackStateCleo and ropeLength.length() > MIN_CHARGE_LENGTH and Cleo.linear_velocity.length() < 2000:
 		#cleoSlingFinished.emit()
@@ -69,13 +75,15 @@ func _physics_process(delta):
 func apply_attack(gummAttacking):
 	# Calculates the magnitude of the drawback 
 	var chargeScale = clamp((ropeLength.length() - MIN_CHARGE_LENGTH) / (MAX_STRETCH_LENGTH - MIN_CHARGE_LENGTH), 0.6, 1)
-	# Calculates how much to snap back based on character's distance from each other
+	#print(chargeScale)
 	
+	# Calculates how much to snap back based on character's distance from each other
 	var snapback = Cleo.global_position.direction_to(Gumm.global_position)
 	
 	var who = Cleo
 	if gummAttacking:
 		who = Gumm
 		snapback = -snapback
-		
+	
+	#print(Vector2(ATTACK_FORCE * snapback.normalized() * chargeScale).length())
 	who.apply_central_impulse(ATTACK_FORCE * snapback.normalized() * chargeScale)
